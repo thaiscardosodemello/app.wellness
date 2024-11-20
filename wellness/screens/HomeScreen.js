@@ -1,14 +1,21 @@
-import { StyleSheet, Text, View } from "react-native";
 import React from "react";
+import { View, Text, StyleSheet, SafeAreaView } from "react-native";
+import Header from "../components/Header";
 
 const HomeScreen = () => {
   return (
-    <View>
-      <Text>HomeScreen</Text>
-    </View>
+    <SafeAreaView style={styles.screen}>
+      <Header />
+      <Text>Conteúdo da Home Screen</Text>
+    </SafeAreaView>
   );
 };
 
-export default HomeScreen;
+const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+    backgroundColor: "#fff",
+  },
+});
 
-const styles = StyleSheet.create({});
+export default HomeScreen;
