@@ -1,12 +1,14 @@
 import React from "react";
 import { StyleSheet, Text, SafeAreaView } from "react-native";
+// Components
 import Header from "../components/Header";
+import CustomCalendar from "../components/CustomCalendar";
 
 const CalendarScreen = () => {
   return (
     <SafeAreaView style={styles.screen}>
       <Header />
-      <Text>Conteúdo de CalendarScreen</Text>
+      <CustomCalendar />
     </SafeAreaView>
   );
 };
