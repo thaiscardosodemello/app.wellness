@@ -1,14 +1,21 @@
-import { StyleSheet, Text, View } from "react-native";
 import React from "react";
+import { StyleSheet, Text, SafeAreaView } from "react-native";
+import Header from "../components/Header";
 
 const SettingsScreen = () => {
   return (
-    <View>
-      <Text>SettingsScreen</Text>
-    </View>
+    <SafeAreaView style={styles.screen}>
+      <Header />
+      <Text>Conteúdo de SettingsScreen</Text>
+    </SafeAreaView>
   );
 };
 
 export default SettingsScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+    backgroundColor: "#fff",
+  },
+});
