@@ -1,17 +1,19 @@
-import React from "react";
+import React, {useState} from "react";
 import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 
+
 const Header = () => {
   const navigation = useNavigation();
-  const route = useRoute(); // Identifica a rota atual
+  const route = useRoute();// Identifica a rota atual
+  const [username, setUsername] = useState('');
 
   const renderGreeting = () => {
     const hours = new Date().getHours();
-    if (hours < 12) return "Good Morning!";
-    if (hours < 18) return "Good Afternoon!";
-    return "Good Evening!";
+    if (hours < 12) return "Good Morning Thais!";
+    if (hours < 18) return "Good Afternoon Thais!";
+    return "Good Evening Thais!";
   };
 
   return (
