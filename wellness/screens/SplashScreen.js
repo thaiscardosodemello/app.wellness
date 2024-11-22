@@ -1,37 +1,77 @@
 import React, { useEffect } from "react";
-import {View, StyleSheet, Image} from "react-native";
-import LogoWellness from '../assets/wellnessLogo/logo.png';
+import { StyleSheet, Image, View } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
+import {
+  Easing,
+  withTiming,
+  useSharedValue,
+  useAnimatedStyle,
+} from "react-native-reanimated";
+import LogoWellness from "../assets/wellnessLogo/logo.png";
 
-// Função para a Splash Screen
 const SplashScreen = ({ navigation }) => {
-  useEffect(() => {
-    // Depois de 2 segundos carrega a tela de login
-    const timer = setTimeout(() => {
-      navigation.replace("Register");
-    }, 2000); // 2 segundos
+  const gradientPosition = useSharedValue(0); // Animação do gradiente
+  const scale = useSharedValue(1); // Animação do zoom da logo
 
-    return () => clearTimeout(timer); // Limpar o timer
-  }, [navigation]);
+  useEffect(() => {
+    // Anima o gradiente
+    const timer = setTimeout(() => {
+      gradientPosition.value = withTiming(0.9, {
+        duration: 2500,
+        easing: Easing.linear,
+      });
+
+      scale.value = withTiming(2.5, {
+        duration: 2500,
+        easing: Easing.ease,
+      });
+
+      // Carrega a tela de login
+      setTimeout(() => {
+        navigation.replace("Register");
+      }, 2500);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, [navigation, gradientPosition, scale]);
+
+  const gradientStyle = useAnimatedStyle(() => {
+    return {
+      locations: [0, gradientPosition.value, 1],
+    };
+  });
+
+  const logoStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ scale: scale.value }], // Aplica o efeito de zoom
+    };
+  });
 
   return (
-    <View style={styles.container}>
-      <Image source={LogoWellness} style={styles.image}></Image>
-    </View>
+    <LinearGradient
+      colors={["#9BF8F4", "#6F7BF7"]}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 1 }}
+      style={[styles.gradient, gradientStyle]}
+    >
+      <View style={styles.logoContainer}>
+        <Image source={LogoWellness} style={[styles.image, logoStyle]} />
+      </View>
+    </LinearGradient>
   );
 };
 
-// Style
 const styles = StyleSheet.create({
-  container: {
+  gradient: {
     flex: 1,
+    width: "100%",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#82B2F6",
   },
-  image: {
-    width: 250,
-    height: 250
-  }
+  logoContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
 });
 
 export default SplashScreen;

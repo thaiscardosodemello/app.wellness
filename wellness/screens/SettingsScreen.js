@@ -25,7 +25,7 @@ const SettingsScreen = () => {
 
     const handleOpenLink = () => {
         const url = 'https://www.instagram.com/serratecoficial?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==';
-        Linking.openURL(url).catch((err)=> console.error('Erro ao abrir o link'));
+        Linking.openURL(url).catch((err)=> console.error('Error opening the link.'));
     }
 
   return (

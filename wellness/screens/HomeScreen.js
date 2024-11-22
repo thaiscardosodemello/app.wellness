@@ -6,6 +6,7 @@ import {
   SafeAreaView,
   TouchableOpacity,
   Linking,
+  Switch,
 } from "react-native";
 import Header from "../components/Header";
 import AntDesign from "@expo/vector-icons/AntDesign";
@@ -28,6 +29,14 @@ const HomeScreen = () => {
       console.error("Error opening the link.")
     );
   };
+
+  const [isEnabled1, setIsEnabled1] = useState(false);
+
+  const toggleSwitch1 = () => setIsEnabled1((previousState) => !previousState);
+
+  const [isEnabled2, setIsEnabled2] = useState(false);
+
+  const toggleSwitch2 = () => setIsEnabled2((previousState) => !previousState);
 
   return (
     <SafeAreaView style={styles.screen}>
@@ -157,6 +166,7 @@ const HomeScreen = () => {
         <Text style={{ fontSize: 10, color: "#FFF", marginLeft: 1 }}>
           Alarm at 8:20 a.m.
         </Text>
+        <Switch value={isEnabled1} onValueChange={toggleSwitch1} />
       </View>
 
       <View
@@ -183,6 +193,7 @@ const HomeScreen = () => {
         <Text style={{ fontSize: 10, color: "#FFF", marginLeft: 1 }}>
           Alarm at 9:00 a.m.
         </Text>
+        <Switch value={isEnabled2} onValueChange={toggleSwitch2} />
       </View>
 
       <View
