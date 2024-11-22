@@ -87,7 +87,9 @@ const CalendarScreen = () => {
               <View style={styles.progressContainer}>
                 <Text style={styles.percentageText}>67%</Text>
 
-                <Text>aqui vai a barra de progresso</Text>
+                <View style = {styles.progressBarBack}>
+                  <View style={[styles.progressBarFill, {width: '67%'}]}/>
+                </View>
               </View>
             </View>
           ))}
@@ -265,4 +267,17 @@ const styles = StyleSheet.create({
   scrollView: {
     flex: 1, // Garante que o ScrollView ocupe todo o espaço disponível
   },
+  progressBarBack: {
+    width: '100%',
+    height: 10,
+    backgroundColor: '#E0E0E0',
+    borderRadius: 5,
+    overflow: 'hidden',
+    marginTop: 5,
+  },
+  progressBarFill: {
+    height: '100%',
+    backgroundColor: '#6F7BF7',
+    borderRadius: 5
+  }
 });
