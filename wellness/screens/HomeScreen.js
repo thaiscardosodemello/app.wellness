@@ -17,15 +17,13 @@ const HomeScreen = () => {
 
   const handleOpenLink = () => {
     const url = 'https://youtu.be/fmBRuuQ0Gs8';
-    Linking.openURL(url).catch((err)=> console.error('Erro ao abrir o link'));
+    Linking.openURL(url).catch((err)=> console.error('Error opening the link.'));
   };
 
-  const [time1, setTime1] = useState('06:00');
   const [isEnabled1, setIsEnabled1] = useState(false);
 
   const toggleSwitch1 = () => setIsEnabled1(previousState => !previousState);
 
-  const [time2, setTime2] = useState('07:00');
   const [isEnabled2, setIsEnabled2] = useState(false);
 
   const toggleSwitch2 = () => setIsEnabled2(previousState => !previousState);
