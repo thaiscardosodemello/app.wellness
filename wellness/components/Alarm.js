@@ -65,11 +65,12 @@ const styles = StyleSheet.create({
   },
   alarmContainer: {
     marginTop: 10,
-    width: '90%', 
+    width: '95%',
     alignItems: 'center',
     backgroundColor: 'rgba(200, 162, 255, 0.2)', 
     borderRadius: 10,
     padding: 10,
+    marginLeft: 5
   },
   label: {
     fontSize: 18,
@@ -97,6 +98,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 20,
     textAlign: 'left',
+    marginLeft: 5
   }
 });
 

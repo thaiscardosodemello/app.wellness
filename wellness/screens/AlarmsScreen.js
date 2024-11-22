@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, SafeAreaView } from "react-native";
+import { StyleSheet, View, SafeAreaView } from "react-native";
 import Header from "../components/Header";
 import Clock from '../components/Clock';
 import SleepInfo from '../components/SleepInfo';
