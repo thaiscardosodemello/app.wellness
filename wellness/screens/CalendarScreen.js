@@ -8,19 +8,20 @@ import {
   View,
   TextInput,
   Button,
+  ScrollView, // Importando ScrollView
 } from "react-native";
 // Importando os ícones
 import Icon from "react-native-vector-icons/FontAwesome";
 // Components
 import Header from "../components/Header";
 import CustomCalendar from "../components/CustomCalendar";
-import ProgressBar from "react-native-progress/Bar";
 
 const CalendarScreen = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [newHabit, setNewHabit] = useState("");
   const [habitList, setHabitList] = useState([
     { id: 1, name: "Drink Water", isEditing: false },
+    { id: 2, name: "Work Short Break Water", isEditing: false },
   ]);
   const [currentHabit, setCurrentHabit] = useState(null);
 
@@ -40,13 +41,13 @@ const CalendarScreen = () => {
     } else {
       // Se for um novo hábito, cria um novo com um id único
       const newHabitItem = {
-        id: habitList.length + 1, // Gera um id único
+        id: habitList.length + 1,
         name: newHabit,
       };
       setHabitList((prevHabitList) => [...prevHabitList, newHabitItem]);
     }
 
-    setModalVisible(false); // Fecha o modal
+    setModalVisible(false);
     setNewHabit("");
     setCurrentHabit(null); // Reseta o hábito atual
   };
@@ -54,60 +55,84 @@ const CalendarScreen = () => {
   return (
     <SafeAreaView style={styles.screen}>
       <Header />
-      <CustomCalendar />
 
-      <View style={styles.titleContainer}>
-        <Text style={styles.title}>Daily Habits</Text>
+      <ScrollView style={styles.scrollView}>
+        <CustomCalendar />
 
-        <Pressable
-          style={styles.addButton}
-          onPress={() => setModalVisible(true)}
-        >
-          <Text style={styles.addButtonText}>+</Text>
-        </Pressable>
-      </View>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>Daily Habits</Text>
 
-      {/* Lista de hábitos */}
-      <View style={styles.habitListContainer}>
-        {habitList.map((habit) => (
-          <View key={habit.id} style={styles.habitItem}>
-            <Text style={styles.habitText}>{habit.name}</Text>
-            <Pressable
-              style={styles.editButton}
-              onPress={() => handleEditHabit(habit)}
-            >
-              <Icon name="pencil" size={20} color="#fff" />
-            </Pressable>
-          </View>
-        ))}
-      </View>
-
-      {/* Modal para adicionar ou editar hábito */}
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => setModalVisible(false)}
-      >
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalContent}>
-            <Text style={styles.modalTitle}>
-              {currentHabit ? "Editar Hábito" : "Adicionar Novo Hábito"}
-            </Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Digite o hábito"
-              value={newHabit}
-              onChangeText={setNewHabit}
-            />
-            <Button
-              title={currentHabit ? "Salvar Alterações" : "Adicionar"}
-              onPress={handleSaveHabit}
-            />
-            <Button title="Cancelar" onPress={() => setModalVisible(false)} />
-          </View>
+          <Pressable
+            style={styles.addButton}
+            onPress={() => setModalVisible(true)}
+          >
+            <Text style={styles.addButtonText}>+</Text>
+          </Pressable>
         </View>
-      </Modal>
+
+        {/* Lista de hábitos */}
+        <View style={styles.habitListContainer}>
+          {habitList.map((habit) => (
+            <View key={habit.id} style={styles.habitItem}>
+              <View style={styles.habitHeader}>
+                <Text style={styles.habitText}>{habit.name}</Text>
+                <Pressable
+                  style={styles.editButton}
+                  onPress={() => handleEditHabit(habit)}
+                >
+                  <Icon name="pencil" size={20} color="#3841A1" />
+                </Pressable>
+              </View>
+
+              <View style={styles.progressContainer}>
+                <Text style={styles.percentageText}>67%</Text>
+
+                <Text>aqui vai a barra de progresso</Text>
+              </View>
+            </View>
+          ))}
+        </View>
+
+        {/* Modal para adicionar ou editar hábito */}
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => setModalVisible(false)}
+        >
+          <View style={styles.modalOverlay}>
+            <View style={styles.modalContent}>
+              <Text style={styles.title}>
+                {currentHabit ? "Edit Habit" : "Add New Habit"}
+              </Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Enter the habit"
+                value={newHabit}
+                onChangeText={setNewHabit}
+              />
+
+              {/* Botão "Save" */}
+              <Pressable
+                style={[styles.saveButton, { backgroundColor: "#3841A1" }]}
+                onPress={handleSaveHabit}
+              >
+                <Text style={styles.saveButtonText}>
+                  {currentHabit ? "Save" : "Add"}
+                </Text>
+              </Pressable>
+
+              {/* Botão "Cancel" */}
+              <Pressable
+                style={[styles.cancelButton, { backgroundColor: "#D3D3D3" }]}
+                onPress={() => setModalVisible(false)}
+              >
+                <Text style={styles.cancelButtonText}>Cancel</Text>
+              </Pressable>
+            </View>
+          </View>
+        </Modal>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -128,20 +153,28 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   title: {
-    fontSize: 24,
+    fontSize: 13,
     fontWeight: "bold",
+    color: "#6F7BF7",
+    marginBottom: 10,
   },
+  percentageText: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#fff",
+  },
+
   addButton: {
-    backgroundColor: "#4CAF50",
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    backgroundColor: "#3841A1",
+    width: 30,
+    height: 30,
+    borderRadius: 15,
     justifyContent: "center",
     alignItems: "center",
   },
   addButtonText: {
     color: "#fff",
-    fontSize: 30,
+    fontSize: 18,
     fontWeight: "bold",
   },
   habitListContainer: {
@@ -150,22 +183,31 @@ const styles = StyleSheet.create({
     paddingRight: 16,
   },
   habitItem: {
+    marginBottom: 15,
+    padding: 10,
+    backgroundColor: "#D898E8",
+    borderRadius: 10,
+  },
+  habitHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 15,
-    padding: 10,
-    backgroundColor: "#f1f1f1",
-    borderRadius: 10,
+    marginBottom: 10,
   },
   habitText: {
-    fontSize: 18,
+    fontSize: 13,
     fontWeight: "bold",
+    color: "#fff",
   },
   editButton: {
-    backgroundColor: "#ff9800",
     padding: 5,
     borderRadius: 5,
+  },
+  progressContainer: {
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "flex-start",
+    width: "100%",
   },
   modalOverlay: {
     flex: 1,
@@ -185,6 +227,32 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 20,
   },
+  saveButton: {
+    width: "100%",
+    padding: 10,
+    borderRadius: 5,
+    marginBottom: 10,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  saveButtonText: {
+    color: "#fff",
+    fontSize: 14,
+    fontWeight: "bold",
+  },
+
+  cancelButton: {
+    width: "100%",
+    padding: 10,
+    borderRadius: 5,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  cancelButtonText: {
+    color: "#333",
+    fontSize: 14,
+    fontWeight: "bold",
+  },
   input: {
     width: "100%",
     height: 40,
@@ -193,5 +261,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingLeft: 8,
     marginBottom: 20,
+  },
+  scrollView: {
+    flex: 1, // Garante que o ScrollView ocupe todo o espaço disponível
   },
 });
