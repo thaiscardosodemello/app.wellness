@@ -43,7 +43,7 @@ export default function LoginScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>LOGIN</Text>
+      <Text style={styles.text}>Login to Wellness</Text>
 
       <TextInput
         placeholder="Email"
@@ -81,18 +81,18 @@ const styles = StyleSheet.create({
   },
   input: {
     width: "80%",
-    fontSize: 16,
+    fontSize: 14,
     paddingVertical: 12,
     paddingLeft: 15,
-    marginBottom: 20,
-    borderRadius: 25,
+    marginBottom: 10,
+    borderRadius: 10,
     borderWidth: 1,
     borderColor: "#fff",
     backgroundColor: "#fff",
     color: "#121212",
   },
   text: {
-    fontSize: 24,
+    fontSize: 16,
     color: "#fff",
     fontWeight: "bold",
     marginBottom: 20,
@@ -101,20 +101,20 @@ const styles = StyleSheet.create({
     width: "80%",
     paddingVertical: 15,
     backgroundColor: "#00397F",
-    borderRadius: 25,
+    borderRadius: 10,
     alignItems: "center",
     justifyContent: "center",
     marginVertical: 15,
   },
   buttonText: {
-    fontSize: 18,
+    fontSize: 14,
     color: "#fff",
     fontWeight: "bold",
   },
   registerLink: {
+    color: "#fff",
+    fontSize: 12,
     color: "#00397F",
-    fontSize: 16,
     textDecorationLine: "underline",
-    marginTop: 20,
   },
 });
