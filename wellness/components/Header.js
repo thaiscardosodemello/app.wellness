@@ -3,9 +3,11 @@ import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 
+
 const Header = () => {
   const navigation = useNavigation();
-  const route = useRoute(); // Identifica a rota atual
+  const route = useRoute();// Identifica a rota atual
+  const [username, setUsername] = useState('');
   const [imageError, setImageError] = useState(false); // Verificar a imagem
 
   const userName = "Thais"; // Popula nome (pode substituir por dados dinâmicos depois)
