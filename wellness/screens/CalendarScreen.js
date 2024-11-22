@@ -20,7 +20,6 @@ const CalendarScreen = () => {
   const [newHabit, setNewHabit] = useState("");
   const [habitList, setHabitList] = useState([
     { id: 1, name: "Drink Water", isEditing: false },
-    { id: 2, name: "Work Short Break Water", isEditing: false },
   ]);
   const [currentHabit, setCurrentHabit] = useState(null);
 
@@ -51,6 +50,8 @@ const CalendarScreen = () => {
     setCurrentHabit(null); // Reseta o hábito atual
   };
 
+  const habitColors = ["#D898E8", "#FFADC7", "#CFEA90"];
+
   return (
     <SafeAreaView style={styles.screen}>
       <Header />
@@ -71,8 +72,14 @@ const CalendarScreen = () => {
 
         {/* Lista de hábitos */}
         <View style={styles.habitListContainer}>
-          {habitList.map((habit) => (
-            <View key={habit.id} style={styles.habitItem}>
+          {habitList.map((habit, index) => (
+            <View
+              key={habit.id}
+              style={[
+                styles.habitItem,
+                { backgroundColor: habitColors[index % habitColors.length] },
+              ]}
+            >
               <View style={styles.habitHeader}>
                 <Text style={styles.habitText}>{habit.name}</Text>
                 <Pressable
@@ -84,10 +91,10 @@ const CalendarScreen = () => {
               </View>
 
               <View style={styles.progressContainer}>
-                <Text style={styles.percentageText}>67%</Text>
+                <Text style={styles.percentageText}>21%</Text>
 
                 <View style={styles.progressBarBack}>
-                  <View style={[styles.progressBarFill, { width: "67%" }]} />
+                  <View style={[styles.progressBarFill, { width: "21%" }]} />
                 </View>
               </View>
             </View>
@@ -185,7 +192,6 @@ const styles = StyleSheet.create({
   habitItem: {
     marginBottom: 15,
     padding: 10,
-    backgroundColor: "#D898E8",
     borderRadius: 10,
   },
   habitHeader: {
@@ -267,15 +273,15 @@ const styles = StyleSheet.create({
   },
   progressBarBack: {
     width: "100%",
-    height: 20,
-    backgroundColor: "#E0E0E0",
+    height: 10,
+    backgroundColor: "#fff",
     borderRadius: 5,
     overflow: "hidden",
     marginTop: 5,
   },
   progressBarFill: {
     height: "100%",
-    backgroundColor: "#6F7BF7",
+    backgroundColor: "#3841A1",
     borderRadius: 5,
   },
 });
