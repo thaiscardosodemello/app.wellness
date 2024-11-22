@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, Linking } from "react-native";
+import {View, Text, StyleSheet, SafeAreaView, TouchableOpacity, Linking, Switch} from "react-native";
 import Header from "../components/Header";
 import AntDesign from '@expo/vector-icons/AntDesign';
 
@@ -18,7 +18,17 @@ const HomeScreen = () => {
   const handleOpenLink = () => {
     const url = 'https://youtu.be/fmBRuuQ0Gs8';
     Linking.openURL(url).catch((err)=> console.error('Erro ao abrir o link'));
-  }
+  };
+
+  const [time1, setTime1] = useState('06:00');
+  const [isEnabled1, setIsEnabled1] = useState(false);
+
+  const toggleSwitch1 = () => setIsEnabled1(previousState => !previousState);
+
+  const [time2, setTime2] = useState('07:00');
+  const [isEnabled2, setIsEnabled2] = useState(false);
+
+  const toggleSwitch2 = () => setIsEnabled2(previousState => !previousState);
 
   return (
     <SafeAreaView style={styles.screen}>
@@ -72,6 +82,10 @@ const HomeScreen = () => {
             marginTop: -15, 
             padding: 10}}>Drink Water</Text>
           <Text style ={{fontSize: 10, color: '#FFF', marginLeft: 1}}>Alarm at 8:20 a.m.</Text>
+          <Switch
+              value={isEnabled1}
+              onValueChange={toggleSwitch1}
+          />
         </View>
 
         <View style={{backgroundColor: '#6F7BF7', 
@@ -86,6 +100,10 @@ const HomeScreen = () => {
             marginTop: -15, 
             padding: 10}}>Work Start</Text>
           <Text style ={{fontSize: 10, color: '#FFF', marginLeft: 1}}>Alarm at 9:00 a.m.</Text>
+          <Switch
+              value={isEnabled2}
+              onValueChange={toggleSwitch2}
+          />
         </View>
 
         <View style={{backgroundColor: '#6F7BF7', 
