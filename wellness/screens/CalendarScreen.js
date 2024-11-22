@@ -7,8 +7,7 @@ import {
   Modal,
   View,
   TextInput,
-  Button,
-  ScrollView, // Importando ScrollView
+  ScrollView,
 } from "react-native";
 // Importando os ícones
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -26,9 +25,9 @@ const CalendarScreen = () => {
   const [currentHabit, setCurrentHabit] = useState(null);
 
   const handleEditHabit = (habit) => {
-    setCurrentHabit(habit); // Define qual hábito será editado
-    setNewHabit(habit.name); // Preenche o campo de entrada com o nome atual do hábito
-    setModalVisible(true); // Abre o modal de edição
+    setCurrentHabit(habit);
+    setNewHabit(habit.name);
+    setModalVisible(true);
   };
 
   const handleSaveHabit = () => {
@@ -87,8 +86,8 @@ const CalendarScreen = () => {
               <View style={styles.progressContainer}>
                 <Text style={styles.percentageText}>67%</Text>
 
-                <View style = {styles.progressBarBack}>
-                  <View style={[styles.progressBarFill, {width: '67%'}]}/>
+                <View style={styles.progressBarBack}>
+                  <View style={[styles.progressBarFill, { width: "67%" }]} />
                 </View>
               </View>
             </View>
@@ -124,7 +123,6 @@ const CalendarScreen = () => {
                 </Text>
               </Pressable>
 
-              {/* Botão "Cancel" */}
               <Pressable
                 style={[styles.cancelButton, { backgroundColor: "#D3D3D3" }]}
                 onPress={() => setModalVisible(false)}
@@ -265,19 +263,19 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   scrollView: {
-    flex: 1, // Garante que o ScrollView ocupe todo o espaço disponível
+    flex: 1,
   },
   progressBarBack: {
-    width: '100%',
-    height: 10,
-    backgroundColor: '#E0E0E0',
+    width: "100%",
+    height: 20,
+    backgroundColor: "#E0E0E0",
     borderRadius: 5,
-    overflow: 'hidden',
+    overflow: "hidden",
     marginTop: 5,
   },
   progressBarFill: {
-    height: '100%',
-    backgroundColor: '#6F7BF7',
-    borderRadius: 5
-  }
+    height: "100%",
+    backgroundColor: "#6F7BF7",
+    borderRadius: 5,
+  },
 });

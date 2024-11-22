@@ -3,11 +3,9 @@ import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 
-
 const Header = () => {
   const navigation = useNavigation();
   const route = useRoute();
-  const [username, setUsername] = useState('');
   const [imageError, setImageError] = useState(false);
 
   const userName = "Thais";
@@ -24,6 +22,10 @@ const Header = () => {
   };
 
   const renderAvatar = () => {
+    if (route.name === "Settings" || route.name === "SettingsScreen") {
+      return null;
+    }
+
     if (imageError) {
       return <Ionicons name="person-circle" size={40} color="#6F7BF7" />;
     }
@@ -68,7 +70,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     padding: 10,
     backgroundColor: "#fff",
-    paddingTop: 40,
+    paddingTop: 50,
   },
   greetingContainer: {
     flexDirection: "row",
