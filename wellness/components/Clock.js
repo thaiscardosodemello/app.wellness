@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Svg, Circle, Text as SvgText } from 'react-native-svg';
 
@@ -8,41 +8,39 @@ const Clock = () => {
   const circumference = 2 * Math.PI * radius;
   const [sleepPercentage, setSleepPercentage] = useState(50); 
   const sleepCircumference = (sleepPercentage / 100) * circumference;
+  const [currentTime, setCurrentTime] = useState('');
 
-  // Função para lidar com o clique e atualizar o sono
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      const hours = now.getHours().toString().padStart(2, '0');
+      const minutes = now.getMinutes().toString().padStart(2, '0');
+      setCurrentTime(`${hours}:${minutes}`);
+    }
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+
+
   const handlePress = (event) => {
     const { locationX, locationY } = event.nativeEvent;
     const centerX = 110;
     const centerY = 110;
 
-    // Calculando o ângulo do clique
-    const angle = Math.atan2(locationY - centerY, locationX - centerX);
-    const angleInDegrees = (angle * 180) / Math.PI + 180; // Convertendo para graus
 
-    // Atualizando o percentual de sono baseado no ângulo
+    const angle = Math.atan2(locationY - centerY, locationX - centerX);
+    const angleInDegrees = (angle * 180) / Math.PI + 180;
+
     const newPercentage = Math.round((angleInDegrees / 360) * 100);
     setSleepPercentage(newPercentage);
   };
 
-  // Função para calcular a posição radial dos marcadores (para as horas 00, 06, 12, 18)
-  const getMarkerPosition = (angle) => {
-    const innerRadius = radius - 15; // Marcadores mais internos, com um pequeno afastamento da borda
-    const radians = (angle - 90) * (Math.PI / 180); // Convertendo para radianos e ajustando o ângulo
-    const x = 110 + Math.cos(radians) * innerRadius;
-    const y = 110 + Math.sin(radians) * innerRadius;
-    return { x, y };
-  };
-
-  // Definindo as posições dos marcadores (00:00, 06:00, 12:00, 18:00)
-  const markers = [0, 6, 12, 18]; // Horários fixos no círculo: 00:00, 06:00, 12:00, 18:00
-
-  // Calculando as posições dos marcadores
-  const markerPositions = markers.map(marker => getMarkerPosition(marker));
 
   return (
     <View style={styles.container}>
       <Svg width={220} height={220} viewBox="0 0 220 220" onPress={handlePress}>
-        {/* Borda do relógio com espessura normal (sem alteração) */}
         <Circle
           cx="110"
           cy="110"
@@ -51,8 +49,7 @@ const Clock = () => {
           strokeWidth={15}  
           fill="none"
         />
-        
-        {/* Barra de sono */}
+
         <Circle
           cx="110"
           cy="110"
@@ -61,25 +58,22 @@ const Clock = () => {
           strokeWidth={15} 
           strokeDasharray={circumference}
           strokeDashoffset={circumference - sleepCircumference}
+          fill='none'
         />
-
-        {/* Marcadores de hora (00, 06, 12, 18) */}
-        {markerPositions.map((pos, index) => (
-          <SvgText
-            key={index}
-            x={pos.x}
-            y={pos.y}
-            textAnchor="middle"
-            fontSize="12"
-            fill="black"
-          >
-            {markers[index]}:00
-          </SvgText>
-        ))}
+        <SvgText
+            x='110'
+            y='110'
+            textAnchor='middle'
+            fontSize= '35'
+            fill = 'purple'
+            fontWeight= 'bold'
+            alignmentBaseline= 'middle'
+        >
+          {currentTime}
+        </SvgText>
       </Svg>
 
-      {/* Hora ao centro em fonte grande */}
-      <Text style={styles.centerText}>{sleepPercentage}% do dia de sono</Text>
+      <Text style={styles.centerText}>{sleepPercentage}% of the day's sleep</Text>
     </View>
   );
 };
@@ -92,7 +86,7 @@ const styles = StyleSheet.create({
   },
   centerText: {
     marginTop: 20,
-    fontSize: 30,  // Fonte maior
+    fontSize: 30,
     fontWeight: 'bold',
     color: 'purple',
   },

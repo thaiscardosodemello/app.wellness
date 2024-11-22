@@ -16,7 +16,7 @@ const CustomCalendar = () => {
           marginBottom: 10,
         }}
         renderHeader={() => (
-          <Text style={styles.headerTitle}>November 2024</Text> // Ajuste dinamicamente o mês/ano conforme necessário
+          <Text style={styles.headerTitle}>November 2024</Text>
         )}
         theme={{
           arrowStyle: {

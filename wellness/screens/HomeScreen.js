@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, Linking } from "react-native";
 import Header from "../components/Header";
 import AntDesign from '@expo/vector-icons/AntDesign';
 
@@ -14,6 +14,11 @@ const HomeScreen = () => {
       setIsSelected(false);
     }
   };
+
+  const handleOpenLink = () => {
+    const url = 'https://youtu.be/fmBRuuQ0Gs8';
+    Linking.openURL(url).catch((err)=> console.error('Erro ao abrir o link'));
+  }
 
   return (
     <SafeAreaView style={styles.screen}>
@@ -40,7 +45,9 @@ const HomeScreen = () => {
           <Text style ={{fontSize: 30, color: '#6F7BF7', fontWeight: 'bold', marginTop: -20, marginLeft: -15}}>Ready to Start</Text>
           <Text style ={{fontSize: 30, color: '#6F7BF7', fontWeight: 'bold', marginLeft: -15}}>Your Day?</Text>
           <Text style ={{fontSize: 13, color: '#232539', padding: 15, marginLeft: -25}}>Meditation to focus!</Text>
-          <AntDesign name="play" size={30} color="#6F7BF7" style={styles.icon}/>
+          <TouchableOpacity style={styles.icon} onPress={handleOpenLink}>
+            <AntDesign name="play" size={30} color="#6F7BF7"/>
+          </TouchableOpacity>
           <Text style ={{fontSize: 13, color: '#232539', fontWeight: 'bold', marginLeft: 15}}>5 Minutes</Text>
         </View>
 
@@ -119,7 +126,7 @@ const styles = StyleSheet.create({
   icon: {
     position: 'absolute',
     marginLeft: 10,
-    marginTop: 123
+    marginTop: 137
   }
 
 });

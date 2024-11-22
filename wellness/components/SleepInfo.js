@@ -36,7 +36,7 @@ const SleepInfo = () => {
           />
           <View style={[styles.bar, {
             width: `${qualityPercentage}%`,
-            backgroundColor: '#610094',
+            backgroundColor: '#D898E8',
             borderRadius: 10,
           }]}/>
           <Text>{qualityPercentage}%</Text>
@@ -45,7 +45,7 @@ const SleepInfo = () => {
         <View style={[styles.division, styles.qualityContainer]}>
           <View style={styles.titleContainer}>
           <Foundation name="graph-pie" size={24} color="black" />
-            <Text style={styles.title}>Duraction</Text>
+            <Text style={styles.title}>Duration</Text>
           </View>
           <TextInput
             style={styles.input}
@@ -57,7 +57,7 @@ const SleepInfo = () => {
           <View style={styles.barContainer}>
             <View style={[styles.barFilled, {
               width: `${sleepDurationPercentage}%`,
-              backgroundColor: '#610094',
+              backgroundColor: '#D898E8',
               borderRadius: 10,
             }]}/>
 
@@ -112,7 +112,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(200, 162, 255, 0.2)', 
     borderRadius: 5,
     padding: 5,
-    color: 'black',
     fontSize: 16,
 
   },

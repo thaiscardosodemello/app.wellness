@@ -6,11 +6,11 @@ import { Ionicons } from "@expo/vector-icons";
 
 const Header = () => {
   const navigation = useNavigation();
-  const route = useRoute();// Identifica a rota atual
+  const route = useRoute();
   const [username, setUsername] = useState('');
-  const [imageError, setImageError] = useState(false); // Verificar a imagem
+  const [imageError, setImageError] = useState(false);
 
-  const userName = "Thais"; // Popula nome (pode substituir por dados dinâmicos depois)
+  const userName = "Thais";
 
   const renderGreeting = () => {
     const hours = new Date().getHours();
@@ -20,7 +20,7 @@ const Header = () => {
   };
 
   const handleImageError = () => {
-    setImageError(true); // Se a imagem não carregar
+    setImageError(true);
   };
 
   const renderAvatar = () => {
@@ -35,7 +35,7 @@ const Header = () => {
           styles.avatar,
           route.name === "Home" ? styles.avatarLeft : styles.avatarRight,
         ]}
-        onError={handleImageError} // Detecta o erro de carregamento da imagem
+        onError={handleImageError}
       />
     );
   };
@@ -43,7 +43,6 @@ const Header = () => {
   return (
     <View style={styles.header}>
       {route.name === "Home" ? (
-        // Na Home exibe a saudação e o avatar alinhado à esquerda
         <View style={styles.greetingContainer}>
           {renderAvatar()}
           <Text style={styles.greetingText}>
@@ -51,7 +50,6 @@ const Header = () => {
           </Text>
         </View>
       ) : (
-        // Nas outras telas exibe o botão de voltar e o avatar alinhado à direita
         <View style={styles.backButtonContainer}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Ionicons name="chevron-back" size={30} color="#6F7BF7" />
