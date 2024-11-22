@@ -10,7 +10,7 @@ export default function LoginScreen() {
 
   const handleLogin = async () => {
     if (!email || !password) {
-      Alert.alert('Erro', 'Por favor, preencha todos os campos');
+      Alert.alert('Erro', 'Please fill in all the fields');
       return;
     }
 
@@ -21,16 +21,16 @@ export default function LoginScreen() {
         const user = JSON.parse(storedUser);
         if (user.email === email && user.password === password) {
           navigation.navigate('Main');
-          Alert.alert('Sucesso', 'Login bem-sucedido!');
+          Alert.alert('Success', 'Login successful!');
         } else {
-          Alert.alert('Erro', 'Credenciais inválidas');
+          Alert.alert('Erro', '"Invalid credentials');
         }
       } else {
         Alert.alert('Erro', 'Nenhum usuário registrado');
       }
     } catch (error) {
       console.error(error);
-      Alert.alert('Erro', 'Erro ao verificar as credenciais');
+      Alert.alert('Erro', 'Error verifying credentials.');
     }
   };
 

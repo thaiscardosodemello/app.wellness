@@ -30,7 +30,7 @@ const SleepInfo = () => {
           <TextInput
             style={styles.input}
             keyboardType="numeric"
-            placeholder="Digite a qualidade do sono (%)"
+            placeholder="Enter the sleep quality (%)"
             value={quality}
             onChangeText={setQuality}
           />
