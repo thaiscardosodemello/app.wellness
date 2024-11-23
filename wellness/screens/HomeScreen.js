@@ -17,8 +17,8 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 const getBackgroundImage = () => {
   const hour = new Date().getHours();
   return hour >= 6 && hour < 18
-    ? require("../assets/day.jpg") // Imagem de dia
-    : require("../assets/night.jpg"); // Imagem de noite
+    ? require("../assets/day.jpg")
+    : require("../assets/night.jpg");
 };
 
 const HomeScreen = () => {
@@ -40,7 +40,6 @@ const HomeScreen = () => {
       <ScrollView contentContainerStyle={{ paddingBottom: 50 }}>
         <Header />
 
-        {/* Primeira Seção com imagem de fundo baseada no horário */}
         <ImageBackground
           source={getBackgroundImage()}
           style={styles.backgroundImage}
@@ -89,21 +88,21 @@ const HomeScreen = () => {
           <Switch
             value={isEnabled1}
             onValueChange={toggleSwitch1}
-            trackColor={{ false: "#F1F1F1", true: "#F1F1F1" }} // Cor do fundo
-            thumbColor={isEnabled1 ? "#3841A1" : "#90FAF5"} // Cor do botão
+            trackColor={{ false: "#F1F1F1", true: "#F1F1F1" }}
+            thumbColor={isEnabled1 ? "#3841A1" : "#90FAF5"}
           />
         </View>
 
         <View style={styles.alarmContainer}>
           <View style={styles.alarmTextContainer}>
-            <Text style={styles.alarmTitle}>Work Start</Text>
+            <Text style={styles.alarmTitle}>Start Work</Text>
             <Text style={styles.alarmTime}>Alarm at 9:00 a.m.</Text>
           </View>
           <Switch
             value={isEnabled2}
             onValueChange={toggleSwitch2}
-            trackColor={{ false: "#F1F1F1", true: "#F1F1F1" }} // Cor do fundo
-            thumbColor={isEnabled2 ? "#3841A1" : "#90FAF5"} // Cor do botão
+            trackColor={{ false: "#F1F1F1", true: "#F1F1F1" }}
+            thumbColor={isEnabled2 ? "#3841A1" : "#90FAF5"}
           />
         </View>
       </ScrollView>
