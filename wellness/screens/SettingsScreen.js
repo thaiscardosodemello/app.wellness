@@ -207,7 +207,7 @@ const SettingsScreen = () => {
                 <Switch
                   value={sleepTypes[type]}
                   onValueChange={() => handleSleepTypeToggle(type)}
-                  trackColor={{ true: "#c1c1c1", false: "#9B59B6" }}
+                  trackColor={{ true: "#c1c1c1", false: "#c1c1c1" }}
                   thumbColor={sleepTypes[type] ? "#9BF8F4" : "#3841A1"}
                 />
               </View>
@@ -236,7 +236,7 @@ const SettingsScreen = () => {
               <Switch
                 value={notifications.enabled}
                 onValueChange={toggleNotification}
-                trackColor={{ true: "#c1c1c1", false: "#9B59B6" }}
+                trackColor={{ true: "#c1c1c1", false: "#c1c1c1" }}
                 thumbColor={notifications.enabled ? "#9BF8F4" : "#3841A1"}
                 style={
                   notifications.enabled ? styles.switchOn : styles.switchOff
@@ -248,7 +248,7 @@ const SettingsScreen = () => {
               <Switch
                 value={notifications.vibrate}
                 onValueChange={toggleVibration}
-                trackColor={{ true: "#c1c1c1", false: "#9B59B6" }}
+                trackColor={{ true: "#c1c1c1", false: "#c1c1c1" }}
                 thumbColor={notifications.vibrate ? "#9BF8F4" : "#3841A1"}
                 style={
                   notifications.vibrate ? styles.switchOn : styles.switchOff
@@ -368,7 +368,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#3841A1",
   },
   activeButton: {
-    backgroundColor: "#c1c1c1",
+    backgroundColor: "#15172Cc1c1c1",
   },
   saveButtonText: {
     color: "#fff",
