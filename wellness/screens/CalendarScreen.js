@@ -7,8 +7,7 @@ import {
   Modal,
   View,
   TextInput,
-  Button,
-  ScrollView, // Importando ScrollView
+  ScrollView,
 } from "react-native";
 // Importando os ícones
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -21,14 +20,13 @@ const CalendarScreen = () => {
   const [newHabit, setNewHabit] = useState("");
   const [habitList, setHabitList] = useState([
     { id: 1, name: "Drink Water", isEditing: false },
-    { id: 2, name: "Work Short Break Water", isEditing: false },
   ]);
   const [currentHabit, setCurrentHabit] = useState(null);
 
   const handleEditHabit = (habit) => {
-    setCurrentHabit(habit); // Define qual hábito será editado
-    setNewHabit(habit.name); // Preenche o campo de entrada com o nome atual do hábito
-    setModalVisible(true); // Abre o modal de edição
+    setCurrentHabit(habit);
+    setNewHabit(habit.name);
+    setModalVisible(true);
   };
 
   const handleSaveHabit = () => {
@@ -52,6 +50,8 @@ const CalendarScreen = () => {
     setCurrentHabit(null); // Reseta o hábito atual
   };
 
+  const habitColors = ["#D898E8", "#FFADC7", "#CFEA90"];
+
   return (
     <SafeAreaView style={styles.screen}>
       <Header />
@@ -72,8 +72,14 @@ const CalendarScreen = () => {
 
         {/* Lista de hábitos */}
         <View style={styles.habitListContainer}>
-          {habitList.map((habit) => (
-            <View key={habit.id} style={styles.habitItem}>
+          {habitList.map((habit, index) => (
+            <View
+              key={habit.id}
+              style={[
+                styles.habitItem,
+                { backgroundColor: habitColors[index % habitColors.length] },
+              ]}
+            >
               <View style={styles.habitHeader}>
                 <Text style={styles.habitText}>{habit.name}</Text>
                 <Pressable
@@ -85,10 +91,10 @@ const CalendarScreen = () => {
               </View>
 
               <View style={styles.progressContainer}>
-                <Text style={styles.percentageText}>67%</Text>
+                <Text style={styles.percentageText}>21%</Text>
 
-                <View style = {styles.progressBarBack}>
-                  <View style={[styles.progressBarFill, {width: '67%'}]}/>
+                <View style={styles.progressBarBack}>
+                  <View style={[styles.progressBarFill, { width: "21%" }]} />
                 </View>
               </View>
             </View>
@@ -124,7 +130,6 @@ const CalendarScreen = () => {
                 </Text>
               </Pressable>
 
-              {/* Botão "Cancel" */}
               <Pressable
                 style={[styles.cancelButton, { backgroundColor: "#D3D3D3" }]}
                 onPress={() => setModalVisible(false)}
@@ -187,7 +192,6 @@ const styles = StyleSheet.create({
   habitItem: {
     marginBottom: 15,
     padding: 10,
-    backgroundColor: "#D898E8",
     borderRadius: 10,
   },
   habitHeader: {
@@ -265,19 +269,19 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   scrollView: {
-    flex: 1, // Garante que o ScrollView ocupe todo o espaço disponível
+    flex: 1,
   },
   progressBarBack: {
-    width: '100%',
+    width: "100%",
     height: 10,
-    backgroundColor: '#E0E0E0',
+    backgroundColor: "#fff",
     borderRadius: 5,
-    overflow: 'hidden',
+    overflow: "hidden",
     marginTop: 5,
   },
   progressBarFill: {
-    height: '100%',
-    backgroundColor: '#6F7BF7',
-    borderRadius: 5
-  }
+    height: "100%",
+    backgroundColor: "#3841A1",
+    borderRadius: 5,
+  },
 });
